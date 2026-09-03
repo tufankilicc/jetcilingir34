@@ -188,20 +188,20 @@ def render_template(path, template_path=TEMPLATE_PATH):
         service_areas.append({"@type": "Place", "name": neighborhood_name})
     business_schema = {
         "@type": "Locksmith",
-        "@id": f"https://jetcilingir.org{path}#business",
+        "@id": f"https://www.jetcilingir34.com{path}#business",
         "name": "JET Çilingir",
-        "url": f"https://jetcilingir.org{path if path != '/index.html' else '/'}",
+        "url": f"https://www.jetcilingir34.com{path if path != '/index.html' else '/'}",
         "telephone": PHONE_TEL,
-        "email": "info@jetcilingir.org",
+        "email": "info@jetcilingir34.com",
         "areaServed": service_areas,
         "serviceType": ["Acil çilingir", "Kapı açma", "Kilit değişimi", "Oto çilingir", "Çelik kasa açma"],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
     }
-    breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://jetcilingir.org/"}]
+    breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://www.jetcilingir34.com/"}]
     if area:
-        breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{area_name} Çilingir", "item": f"https://jetcilingir.org/istanbul/{slug}-cilingir"})
+        breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{area_name} Çilingir", "item": f"https://www.jetcilingir34.com/istanbul/{slug}-cilingir"})
     if neighborhood_name:
-        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": f"{neighborhood_name} Çilingir", "item": f"https://jetcilingir.org{path}"})
+        breadcrumb_items.append({"@type": "ListItem", "position": 3, "name": f"{neighborhood_name} Çilingir", "item": f"https://www.jetcilingir34.com{path}"})
     local_schema = json.dumps({"@context": "https://schema.org", "@graph": [business_schema, {"@type": "BreadcrumbList", "itemListElement": breadcrumb_items}]}, ensure_ascii=False)
     breadcrumb_html = ""
     if area:
@@ -242,7 +242,7 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "{{AREA_LINKS}}": area_links,
         "{{NETWORK_ITEMS}}": network_items,
         "{{SCHEMA_NAME}}": f"JET Cilingir {area_name}",
-        "{{CANONICAL_URL}}": f"https://jetcilingir.org{path if path != '/index.html' else '/'}",
+        "{{CANONICAL_URL}}": f"https://www.jetcilingir34.com{path if path != '/index.html' else '/'}",
         "{{BRAND_CHIPS}}": chips(["Kale Kilit", "Mul-T-Lock", "Yale Kilit", "Yuma Kilit", "Daf Kilit", "Ito Kilit", "Mauer Kilit", "Desi Alarm & Kilit", "Dortek Kilit", "Keso Kilit", "Cisa Kilit", "Abloy Kilit", "Mottura Kilit", "Fiam Kilit", "Securisme Kilit", "Tri-Circle Kilit"]),
         "{{SAFE_CHIPS}}": chips(["Kiratli Kasa", "Eurosafe Kasa", "Kale Celik Kasa", "Gazi Kasa", "Valberg Kasa", "Sentry Safe", "Yale Dijital Kasa", "Burg Wachter", "Besa Kasa", "Chubbsafes", "Mas Kasa", "Kaba Kasa Sistemleri"]),
         "{{AUTO_CHIPS}}": chips(["Volkswagen", "BMW", "Mercedes", "Fiat", "Renault", "Ford", "Toyota", "Hyundai"]),
@@ -270,7 +270,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             return
         if path == "/robots.txt":
-            content = b"User-agent: *\nAllow: /\nSitemap: https://jetcilingir.org/sitemap.xml\n"
+            content = b"User-agent: *\nAllow: /\nSitemap: https://www.jetcilingir34.com/sitemap.xml\n"
             self.send_response(200)
             self.send_header("Content-Type", "text/plain; charset=utf-8")
             self.send_header("Content-Length", str(len(content)))
@@ -278,9 +278,9 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(content)
             return
         if path == "/sitemap.xml":
-            district_urls = [f"https://jetcilingir.org/istanbul/{slugify(name)}-cilingir" for name in DISTRICTS]
-            neighborhood_urls = [f"https://jetcilingir.org/istanbul/{slug}/{slugify(neighborhood)}-cilingir" for slug, neighborhoods in NEIGHBORHOODS_BY_SLUG.items() for neighborhood in neighborhoods]
-            urls = ["https://jetcilingir.org/", "https://jetcilingir.org/hakkimizda.html", "https://jetcilingir.org/iletisim.html"] + [f"https://jetcilingir.org/hizmetler/{slug}.html" for slug in SERVICE_PAGES] + district_urls + neighborhood_urls
+            district_urls = [f"https://www.jetcilingir34.com/istanbul/{slugify(name)}-cilingir" for name in DISTRICTS]
+            neighborhood_urls = [f"https://www.jetcilingir34.com/istanbul/{slug}/{slugify(neighborhood)}-cilingir" for slug, neighborhoods in NEIGHBORHOODS_BY_SLUG.items() for neighborhood in neighborhoods]
+            urls = ["https://www.jetcilingir34.com/", "https://www.jetcilingir34.com/hakkimizda.html", "https://www.jetcilingir34.com/iletisim.html"] + [f"https://www.jetcilingir34.com/hizmetler/{slug}.html" for slug in SERVICE_PAGES] + district_urls + neighborhood_urls
             xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" + "".join(f"<url><loc>{url}</loc><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>"
             content = xml.encode("utf-8")
             self.send_response(200)

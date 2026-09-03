@@ -6,7 +6,7 @@ import app
 
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
-PUBLIC_DOMAIN = "https://jetcilingir34.com"
+PUBLIC_DOMAIN = "https://www.jetcilingir34.com"
 
 
 def clean_text(content):
