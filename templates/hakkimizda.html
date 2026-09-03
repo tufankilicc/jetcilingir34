@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101a2e">
+  <meta name="description" content="JET Çilingir hakkında: 5+ yıllık sektör deneyimiyle İstanbul genelinde 7/24 çilingir hizmeti.">
+  <link rel="canonical" href="https://jetcilingir.org/hakkimizda.html">
+  <title>Hakkımızda | JET Çilingir</title>
+  <script type="application/ld+json">{{LOCAL_SCHEMA}}</script>
+  <style>
+    :root { --ink:#182538; --navy:#172334; --green:#149b59; --red:#e84d50; --line:#dfe6eb; --muted:#697a8e; }
+    * { box-sizing:border-box; }
+    body { margin:0; max-width:100%; overflow-x:hidden; color:var(--ink); background:#f4f6f8; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif; }
+    a { color:inherit; }
+    .topline { height:38px; display:flex; justify-content:space-between; align-items:center; padding:0 3.5vw; color:#b9c6d4; background:#182331; font-size:12px; }
+    .topline strong { color:#61d69a; }
+    .nav { height:72px; display:flex; align-items:center; justify-content:space-between; gap:28px; padding:0 max(4vw,24px); background:#fff; border-bottom:1px solid #e1e7eb; box-shadow:0 5px 18px #20364d0a; }
+    .logo { display:flex; align-items:center; gap:10px; color:var(--ink); font-size:20px; font-weight:900; letter-spacing:-.05em; text-decoration:none; white-space:nowrap; }
+    .logo-badge { display:grid; place-items:center; width:34px; height:34px; border-radius:9px; color:#fff; background:linear-gradient(145deg,#20b568,#0b874a); }
+    .green { color:var(--green); }
+    .nav-links { display:flex; align-items:center; gap:22px; color:#42536a; font-size:12px; font-weight:800; }
+    .nav-links a { text-decoration:none; }
+    .nav-links a:hover { color:var(--green); }
+    .nav-call { padding:10px 20px; border-radius:999px; color:#fff !important; background:var(--red); box-shadow:0 8px 16px #e84d5033; }
+    .hero { position:relative; display:grid; place-items:center; min-height:420px; padding:58px 24px; overflow:hidden; background:linear-gradient(180deg,#fbfcfd,#f1f5f7); }
+    .hero:after { content:""; position:absolute; inset:0; opacity:.16; background-image:linear-gradient(#b4c2cf 1px,transparent 1px),linear-gradient(90deg,#b4c2cf 1px,transparent 1px); background-size:48px 48px; mask-image:linear-gradient(to bottom,transparent,#000 18%,transparent 92%); }
+    .hero-card { position:relative; z-index:1; max-width:760px; padding:38px 42px; border:1px solid #dce5eb; border-radius:20px; background:#fff; box-shadow:0 20px 48px #20364d12; text-align:center; }
+    .eyebrow { display:inline-flex; padding:8px 16px; border:1px solid #48b87f88; border-radius:999px; color:#117d49; background:#149b5910; font-size:11px; font-weight:900; }
+    h1 { margin:16px 0 12px; color:#182538; font-size:clamp(34px,5vw,58px); line-height:1; letter-spacing:-.06em; }
+    h1 span { color:var(--green); }
+    .hero p { margin:0; color:#526983; font-size:14px; line-height:1.7; }
+    .content { max-width:1000px; margin:0 auto; padding:54px 24px 90px; }
+    .section-title { margin:0 0 10px; text-align:center; font-size:28px; }
+    .section-intro { max-width:680px; margin:0 auto 30px; color:var(--muted); text-align:center; line-height:1.7; }
+    .about-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:20px; }
+    .about-card { padding:28px; border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:0 10px 24px #20364d0c; }
+    .about-card h2 { margin:0 0 14px; padding-bottom:10px; border-bottom:2px solid var(--green); font-size:19px; }
+    .about-card p { margin:0 0 14px; color:#526983; font-size:13px; line-height:1.8; }
+    .about-card p:last-child { margin-bottom:0; }
+    .stats { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:22px; }
+    .stat { padding:18px 12px; border-radius:10px; color:#fff; background:var(--navy); text-align:center; }
+    .stat strong { display:block; color:#32d879; font-size:27px; }
+    .stat span { font-size:11px; }
+    .service-list { display:grid; gap:11px; margin:0; padding:0; list-style:none; }
+    .service-list li { padding:12px 14px; border:1px solid #dbe7e0; border-radius:9px; color:#29476c; background:#f7fcf9; font-size:13px; font-weight:700; }
+    .service-list li:before { content:"✓"; margin-right:9px; color:var(--green); font-weight:900; }
+    .cta { display:flex; justify-content:center; gap:12px; margin-top:30px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; min-height:48px; padding:12px 22px; border-radius:999px; color:#fff; font-size:13px; font-weight:900; text-decoration:none; }
+    .button.red { background:var(--red); }
+    .button.green-btn { background:var(--green); }
+    .footer { padding:28px 24px; color:#90a4bf; background:#182331; font-size:12px; }
+    .footer-grid { display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:42px; max-width:1160px; margin:0 auto; }
+    .footer h3 { margin:0 0 14px; color:#fff; font-size:16px; }
+    .footer h3:after { content:""; display:block; width:36px; height:2px; margin-top:9px; background:var(--green); }
+    .footer p { margin:0; line-height:1.7; }
+    .footer-links, .footer-contact { display:grid; gap:10px; }
+    .footer a { color:#90a4bf; text-decoration:none; }
+    .footer a:hover { color:#32df7a; }
+    .footer-contact strong { color:#32df7a; }
+    .footer-bottom { max-width:1160px; margin:26px auto 0; padding-top:16px; border-top:1px solid #ffffff12; font-size:11px; }
+    .floating { position:fixed; right:16px; bottom:16px; z-index:5; display:flex; gap:8px; }
+    .floating .button { min-height:42px; padding:10px 16px; }
+    @media (max-width:700px) { .topline span:first-child { display:none; } .nav { height:58px; gap:10px; padding:0 16px; } .nav-links a:not(.nav-call) { display:none; } .nav-call { padding:9px 12px; font-size:11px; } .hero { min-height:440px; padding:44px 16px; } .hero-card { padding:32px 20px; } h1 { font-size:39px; overflow-wrap:anywhere; } .about-grid { grid-template-columns:1fr; } .content { padding:42px 16px 90px; } .cta { flex-direction:column; } .cta .button { width:100%; } .footer-grid { grid-template-columns:1fr; gap:28px; } .floating { right:8px; bottom:8px; left:8px; } .floating .button { flex:1; } }
+  </style>
+</head>
+<body>
+  <div class="topline"><span>◉ 7/24 Kesintisiz Nöbetçi Çilingir</span><span>Müşteri Destek: <strong>{{PHONE_DISPLAY}}</strong></span></div>
+  <header class="nav"><a class="logo" href="/"><span class="logo-badge">🛡</span><span><span class="green">JET</span> <span class="green">ÇİLİNGİR</span></span></a><nav class="nav-links" aria-label="Ana menü"><a href="/#hizmetler">Hizmetlerimiz</a><a href="/#bolgeler">Servis Bölgeleri</a><a href="/hakkimizda.html">Hakkımızda</a><a href="/iletisim.html">İletişim</a><a class="nav-call" href="tel:{{PHONE_TEL}}">☎ Hemen Ara</a></nav></header>
+  <main>
+    <section class="hero"><div class="hero-card"><div class="eyebrow">⚡ 5+ YILDIR GÜVENLE HİZMET VERİYORUZ</div><h1>JET <span>ÇİLİNGİR</span><br>HAKKIMIZDA</h1><p>İstanbul genelinde hızlı, güvenilir ve hasarsız çilingir çözümleri sunan deneyimli mobil servis ekibiyiz.</p></div></section>
+    <section class="content"><h2 class="section-title">Güvenliğiniz İçin Buradayız</h2><p class="section-intro">JET Çilingir olarak 5 yılı aşkın sektör deneyimimizle ev, iş yeri, araç ve çelik kasa ihtiyaçlarınızda günün her saati yanınızdayız.</p><div class="about-grid"><article class="about-card"><h2>Biz Kimiz?</h2><p>5+ yıldır çilingir sektöründe hizmet veren JET Çilingir, İstanbul’un tüm ilçelerinde mobil ekipleriyle hızlı müdahale sağlar. Kapıda kaldığınızda veya kilit güvenliğinizi yenilemek istediğinizde, ihtiyacınıza uygun profesyonel çözüm sunarız.</p><p>Şeffaf fiyatlandırma, hasarsız işlem ve müşteri memnuniyeti çalışma anlayışımızın temelini oluşturur. Her çağrıda konumunuza en yakın ekibi yönlendirerek bekleme sürenizi kısa tutarız.</p><div class="stats"><div class="stat"><strong>5+</strong><span>Yıllık Deneyim</span></div><div class="stat"><strong>7/24</strong><span>Kesintisiz Destek</span></div></div></article><article class="about-card"><h2>Verdiğimiz Hizmetler</h2><ul class="service-list"><li>Ev ve iş yeri kapı açma</li><li>Çelik kapı açma ve kilit değişimi</li><li>Oto çilingir ve araç anahtarı</li><li>Çelik kasa açma</li><li>Kilit göbeği ve barel değişimi</li><li>Güvenlik kilidi montajı</li></ul></article></div><div class="cta"><a class="button red" href="tel:{{PHONE_TEL}}">☎ Hemen Ara</a><a class="button green-btn" href="/iletisim.html">İletişime Geç</a></div></section>
+  </main>
+  <footer class="footer"><div class="footer-grid"><div><h3>JET Çilingir</h3><p>İstanbul genelinde 7/24 kesintisiz acil çilingir, kapıya zarar vermeyen kilit değişimi ve oto çilingir hizmeti.</p></div><div><h3>Hızlı Bağlantılar</h3><div class="footer-links"><a href="/">Anasayfa</a><a href="/hakkimizda.html">Hakkımızda</a><a href="/#hizmetler">Hizmetlerimiz</a><a href="/#bolgeler">Servis Bölgeleri</a><a href="/iletisim.html">İletişim</a></div></div><div><h3>İletişim &amp; Site Bilgileri</h3><div class="footer-contact"><span>Telefon: <strong><a href="tel:{{PHONE_TEL}}">{{PHONE_DISPLAY}}</a></strong></span><span>E-Posta: <strong>info@jetcilingir.org</strong></span><a href="/sitemap.xml">♟ XML Site Haritası</a></div></div></div><div class="footer-bottom">JET ÇİLİNGİR · İstanbul geneli 7/24 servis</div></footer>
+  <div class="floating"><a class="button green-btn" href="https://wa.me/{{WHATSAPP_NUMBER}}" target="_blank" rel="noreferrer">◉ WhatsApp</a><a class="button red" href="tel:{{PHONE_TEL}}">☎ Hemen Ara</a></div>
+</body>
+</html>
