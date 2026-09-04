@@ -382,6 +382,12 @@
     .footer-contact strong { color:#32df7a; }
     .footer-bottom { max-width:1160px; margin:26px auto 0; padding-top:16px; border-top:1px solid #ffffff12; color:#71849f; font-size:11px; }
     @media (max-width:600px) { .footer-grid { grid-template-columns:1fr; gap:28px; } }
+    @media (max-width:600px) {
+      .hero { min-height:auto; padding-top:18px; padding-bottom:42px; }
+      .hero-inner { padding-top:24px; padding-bottom:30px; }
+      .floating { opacity:0; visibility:hidden; transform:translateY(18px); pointer-events:none; transition:opacity .2s ease, transform .2s ease, visibility .2s ease; }
+      body.has-scrolled .floating { opacity:1; visibility:visible; transform:translateY(0); pointer-events:auto; }
+    }
   </style>
 </head>
 <body>
@@ -455,6 +461,7 @@
     }
     document.getElementById("shareLocation").addEventListener("click", shareLocation);
     document.getElementById("shareLocationBand").addEventListener("click", shareLocation);
+    window.addEventListener("scroll", () => document.body.classList.toggle("has-scrolled", window.scrollY > 120), { passive: true });
     document.querySelectorAll(".button").forEach((button) => button.addEventListener("pointerdown", (event) => {
       const rect = button.getBoundingClientRect();
       button.style.setProperty("--x", `${event.clientX - rect.left}px`);
