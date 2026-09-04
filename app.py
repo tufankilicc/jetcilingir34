@@ -199,6 +199,16 @@ def render_template(path, template_path=TEMPLATE_PATH):
     service_areas = [{"@type": "City", "name": "İstanbul"}] + [{"@type": "AdministrativeArea", "name": name} for name in DISTRICTS]
     if neighborhood_name:
         service_areas.append({"@type": "Place", "name": neighborhood_name})
+    district_neighborhoods = NEIGHBORHOODS_BY_SLUG.get(slug, [])
+    if area and not neighborhood_name:
+        neighborhood_names = ", ".join(district_neighborhoods)
+        area_seo_content += (
+            f'<h3>{escape(area_name)} ilçesinde hizmet kapsamı</h3>'
+            f'<p>{escape(area_name)} ilçesindeki mobil servis yönlendirmemizi ihtiyacınızı dinleyerek yapıyoruz. '
+            f'Kapı açma, kilit değişimi, oto çilingir ve çelik kasa hizmetlerinde işlem türüne uygun ekipmanla hareket ediyoruz.</p>'
+            f'<p>Bu ilçe sayfasında yer alan hizmet bölgeleri: {escape(neighborhood_names)}. '
+            f'Konumunuzu paylaştığınızda size en uygun iletişim ve servis adımını aktarıyoruz.</p>'
+        )
     business_schema = {
         "@type": "Locksmith",
         "@id": f"https://www.jetcilingir34.com{path}#business",
@@ -212,6 +222,10 @@ def render_template(path, template_path=TEMPLATE_PATH):
     }
     faq_question = f"{location_label} bölgesinde çilingir hizmeti nasıl çağrılır?"
     faq_answer = f"{location_label} için telefonla veya WhatsApp üzerinden konumunuzu paylaşabilirsiniz. JET Çilingir, ihtiyacınızı ve kapı veya araç tipini dinledikten sonra uygun mobil ekibi yönlendirir."
+    faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": faq_question, "acceptedAnswer": {"@type": "Answer", "text": faq_answer}}]}, ensure_ascii=False)
+    faq_html = f'<h2>{escape(location_label)} Sık Sorulan Sorular</h2><div class="faq-item"><h3>{escape(faq_question)}</h3><p>{escape(faq_answer)}</p></div>'
+    faq_question = f"{location_label} bölgesinde {focus_title.lower()} için nasıl destek alabilirim?"
+    faq_answer = f"{location_label} için telefonla veya WhatsApp üzerinden konumunuzu paylaşabilirsiniz. JET Çilingir, {focus_title.lower()} ihtiyacınızı ve kapı veya araç tipini dinledikten sonra uygun mobil ekibi yönlendirir."
     faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": faq_question, "acceptedAnswer": {"@type": "Answer", "text": faq_answer}}]}, ensure_ascii=False)
     faq_html = f'<h2>{escape(location_label)} Sık Sorulan Sorular</h2><div class="faq-item"><h3>{escape(faq_question)}</h3><p>{escape(faq_answer)}</p></div>'
     breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://www.jetcilingir34.com/"}]
