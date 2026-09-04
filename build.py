@@ -1,4 +1,5 @@
 from pathlib import Path
+import re
 import shutil
 
 import app
@@ -7,19 +8,11 @@ import app
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
 PUBLIC_DOMAIN = "https://www.jetcilingir34.com"
-OLD_DOMAIN = "https://www.jetcilingir" + "." + "org"
-OLD_DOMAIN_NO_WWW = "https://jetcilingir" + "." + "org"
-OLD_DOMAIN_HTTP = "http://jetcilingir" + "." + "org"
-OLD_DOMAIN_HTTP_WWW = "http://www.jetcilingir" + "." + "org"
-OLD_EMAIL = "info@jetcilingir" + "." + "org"
 
 
 def clean_text(content):
-    return (content.replace(OLD_DOMAIN, PUBLIC_DOMAIN)
-            .replace(OLD_DOMAIN_NO_WWW, PUBLIC_DOMAIN)
-            .replace(OLD_DOMAIN_HTTP_WWW, PUBLIC_DOMAIN)
-            .replace(OLD_DOMAIN_HTTP, PUBLIC_DOMAIN)
-            .replace(OLD_EMAIL, "info@jetcilingir34.com"))
+    content = re.sub(r"https?://(?:www\\.)?jetcilingir\\.[A-Za-z]{2,}", PUBLIC_DOMAIN, content)
+    return re.sub(r"info@jetcilingir\\.[A-Za-z]{2,}", "info@jetcilingir34.com", content)
 
 
 def write_page(url_path, template_path, output_path):
