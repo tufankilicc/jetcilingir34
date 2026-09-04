@@ -29,6 +29,7 @@ def main():
     write_page("/", app.TEMPLATE_PATH, PUBLIC_DIR / "index.html")
     write_page("/hakkimizda.html", app.ABOUT_TEMPLATE_PATH, PUBLIC_DIR / "hakkimizda.html")
     write_page("/iletisim.html", app.CONTACT_TEMPLATE_PATH, PUBLIC_DIR / "iletisim.html")
+    write_page("/404.html", BASE_DIR / "templates" / "404.html", PUBLIC_DIR / "404.html")
 
     service_urls = []
     for slug in app.SERVICE_PAGES:
