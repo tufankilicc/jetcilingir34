@@ -11,9 +11,9 @@ TEMPLATE_PATH = BASE_DIR / "templates" / "index.html"
 CONTACT_TEMPLATE_PATH = BASE_DIR / "templates" / "iletisim.html"
 ABOUT_TEMPLATE_PATH = BASE_DIR / "templates" / "hakkimizda.html"
 SERVICE_TEMPLATE_PATH = BASE_DIR / "templates" / "hizmet.html"
-PHONE_DISPLAY = "+90 539 669 50 87"
-PHONE_TEL = "+905396695087"
-WHATSAPP_NUMBER = "905396695087"
+PHONE_DISPLAY = "+90 531 893 85 15"
+PHONE_TEL = "+905318938515"
+WHATSAPP_NUMBER = "905318938515"
 
 DISTRICTS = [
     "Adalar", "Arnavutk\u00f6y", "Ata\u015fehir", "Avc\u0131lar", "Ba\u011fc\u0131lar", "Bah\u00e7elievler",
