@@ -197,6 +197,7 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "serviceType": ["Acil çilingir", "Kapı açma", "Kilit değişimi", "Oto çilingir", "Çelik kasa açma"],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
     }
+    faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kapı açılmazsa servis ücreti var mı?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır. Kapıyı açamadığımız durumlarda müşterilerimizden servis ücreti talep etmiyoruz. İşlem başlamadan önce yapılabilecek müdahale ve ücret konusunda sizi bilgilendiriyoruz."}}]}, ensure_ascii=False)
     breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://www.jetcilingir34.com/"}]
     if area:
         breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{area_name} Çilingir", "item": f"https://www.jetcilingir34.com/istanbul/{slug}-cilingir"})
@@ -253,6 +254,7 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "{{AREA_SEO_CONTENT}}": area_seo_content,
         "{{AREA_NEIGHBORHOODS}}": neighborhood_content,
         "{{LOCAL_SCHEMA}}": local_schema,
+        "{{FAQ_SCHEMA}}": faq_schema,
         "{{BREADCRUMB_HTML}}": breadcrumb_html,
     }
     values["{{META_DESCRIPTION}}"] = f"{neighborhood_name + ' ' if neighborhood_name else ''}{area_name} 7/24 acil \u00e7ilingir hizmeti. JET \u00c7ilingir; kap\u0131 a\u00e7ma, kilit de\u011fi\u015fimi ve oto \u00e7ilingir deste\u011fiyle h\u0131zl\u0131ca yan\u0131n\u0131zda."
