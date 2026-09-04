@@ -183,6 +183,19 @@ def render_template(path, template_path=TEMPLATE_PATH):
     service_content = "".join(f'<article class="service-detail"><h2>{escape(title)}</h2><p>{escape(body)}</p></article>' for title, body in (service["sections"] if service else []))
     area_seo_content = f'<h2>{escape(area_name)} JET Çilingir | İstanbul’da Güvenilir Acil Servis</h2><p>{escape(area_name)} ve çevresinde kapıda kalma, kilit arızası veya anahtar kaybı gibi durumlarda JET Çilingir olarak hızlı mobil destek sağlıyoruz. İhtiyacınızı telefonda dinleyip bulunduğunuz konuma en yakın ekibi yönlendiriyoruz.</p><p>Ev, iş yeri ve apartman kapısı açma; çelik kapı kilidi, kilit göbeği ve barel değişimi; oto çilingir ve çelik kasa açma hizmetleri sunuyoruz. Müdahale öncesinde yapılabilecek işlemi ve ücret bilgisini açıkça paylaşıyoruz.</p><p>Amacımız, {escape(area_name)} bölgesinde güvenli ve hasarsız çözümler sunmak. Kapı açılamadığı durumlarda müşterilerimizden servis ücreti talep etmiyor, 7/24 ulaşılabilir bir çilingir desteği sağlıyoruz.</p>'
     area_seo_content = repair_text(area_seo_content)
+    location_label = f"{neighborhood_name}, {area_name}" if neighborhood_name else area_name
+    focus_options = [
+        ("Kapı açma ve kilit desteği", "Kapıda kaldığınızda kapı tipini ve kilit durumunu telefonda dinleyerek uygun mobil ekibi yönlendiriyoruz."),
+        ("Kilit değişimi ve güvenlik", "Anahtar kaybı, taşınma veya kilit arızası sonrasında mevcut sistemi kontrol ederek uygun yenileme seçeneklerini anlatıyoruz."),
+        ("Oto çilingir ve anahtar desteği", "Araç anahtarı veya kumanda sorununuzda marka, model ve konum bilgilerinizi alarak uygun mobil desteği planlıyoruz."),
+        ("Çelik kasa ve kilit sorunları", "Anahtar, şifre veya kilit sorunu yaşanan kasalarda kontrollü müdahale seçeneklerini işlem öncesinde paylaşıyoruz."),
+    ]
+    focus_title, focus_body = focus_options[sum(ord(char) for char in location_label) % len(focus_options)]
+    area_seo_content = (
+        f'<h2>{escape(location_label)} JET Çilingir | {focus_title}</h2>'
+        f'<p>{escape(location_label)} bölgesinde {focus_title.lower()} ihtiyaçlarınız için 7/24 mobil servis desteği sunuyoruz. {focus_body}</p>'
+        f'<p>Ev, iş yeri, apartman ve uygun araç hizmetlerinde konumunuzu ve ihtiyacınızı netleştirerek yönlendirme yapıyoruz. Müdahale öncesinde yapılabilecek işlemi ve ücret bilgisini açıkça paylaşıyoruz.</p>'
+    )
     service_areas = [{"@type": "City", "name": "İstanbul"}] + [{"@type": "AdministrativeArea", "name": name} for name in DISTRICTS]
     if neighborhood_name:
         service_areas.append({"@type": "Place", "name": neighborhood_name})
@@ -197,7 +210,10 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "serviceType": ["Acil çilingir", "Kapı açma", "Kilit değişimi", "Oto çilingir", "Çelik kasa açma"],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
     }
-    faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Kapı açılmazsa servis ücreti var mı?", "acceptedAnswer": {"@type": "Answer", "text": "Hayır. Kapıyı açamadığımız durumlarda müşterilerimizden servis ücreti talep etmiyoruz. İşlem başlamadan önce yapılabilecek müdahale ve ücret konusunda sizi bilgilendiriyoruz."}}]}, ensure_ascii=False)
+    faq_question = f"{location_label} bölgesinde çilingir hizmeti nasıl çağrılır?"
+    faq_answer = f"{location_label} için telefonla veya WhatsApp üzerinden konumunuzu paylaşabilirsiniz. JET Çilingir, ihtiyacınızı ve kapı veya araç tipini dinledikten sonra uygun mobil ekibi yönlendirir."
+    faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": faq_question, "acceptedAnswer": {"@type": "Answer", "text": faq_answer}}]}, ensure_ascii=False)
+    faq_html = f'<h2>{escape(location_label)} Sık Sorulan Sorular</h2><div class="faq-item"><h3>{escape(faq_question)}</h3><p>{escape(faq_answer)}</p></div>'
     breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://www.jetcilingir34.com/"}]
     if area:
         breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{area_name} Çilingir", "item": f"https://www.jetcilingir34.com/istanbul/{slug}-cilingir"})
@@ -254,6 +270,7 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "{{AREA_SEO_CONTENT}}": area_seo_content,
         "{{AREA_NEIGHBORHOODS}}": neighborhood_content,
         "{{LOCAL_SCHEMA}}": local_schema,
+        "{{FAQ_HTML}}": faq_html,
         "{{FAQ_SCHEMA}}": faq_schema,
         "{{BREADCRUMB_HTML}}": breadcrumb_html,
     }
