@@ -24,6 +24,7 @@ def main():
     if PUBLIC_DIR.exists():
         shutil.rmtree(PUBLIC_DIR)
     PUBLIC_DIR.mkdir()
+    shutil.copytree(BASE_DIR / "assets", PUBLIC_DIR / "assets")
 
     write_page("/", app.TEMPLATE_PATH, PUBLIC_DIR / "index.html")
     write_page("/hakkimizda.html", app.ABOUT_TEMPLATE_PATH, PUBLIC_DIR / "hakkimizda.html")

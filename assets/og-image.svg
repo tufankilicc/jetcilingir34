@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#101c31"/>
+  <circle cx="1040" cy="90" r="250" fill="#16b364" opacity=".12"/>
+  <circle cx="150" cy="570" r="220" fill="#ef4444" opacity=".08"/>
+  <rect x="90" y="110" width="96" height="96" rx="24" fill="#16b364"/>
+  <path d="M138 129 163 140v19c0 16-10 28-25 36-15-8-25-20-25-36v-19l25-11Z" fill="#fff"/>
+  <path d="M138 143a10 10 0 0 0-10 10v8h6v-8a4 4 0 1 1 8 0v8h6v-8a10 10 0 0 0-10-10Zm-7 22h14v18h-14v-18Z" fill="#16b364"/>
+  <text x="220" y="173" fill="#fff" font-family="Arial, sans-serif" font-size="42" font-weight="700">JET ÇİLİNGİR</text>
+  <text x="90" y="335" fill="#fff" font-family="Arial, sans-serif" font-size="76" font-weight="700">İSTANBUL'DA 7/24</text>
+  <text x="90" y="425" fill="#16b364" font-family="Arial, sans-serif" font-size="76" font-weight="700">ACİL ÇİLİNGİR</text>
+  <text x="94" y="500" fill="#b9c7da" font-family="Arial, sans-serif" font-size="30">Hızlı, güvenilir ve hasarsız mobil servis</text>
+</svg>
