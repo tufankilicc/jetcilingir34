@@ -42,6 +42,44 @@ PRIORITY_AREA_FOCUS = {
     "Sultanbeyli": "Sultanbeyli acil \u00e7ilingir, kap\u0131 a\u00e7ma ve g\u00fcvenlik kilidi",
 }
 
+PRIORITY_FAQS = {
+    "Kartal": [
+        ("Kartal'da kap\u0131da kald\u0131m, acil \u00e7ilingir nas\u0131l \u00e7a\u011f\u0131rabilirim?", "Kartal ve mahallelerinde telefonla veya WhatsApp'tan konumunuzu payla\u015fabilirsiniz. Kap\u0131 tipinizi dinleyip uygun acil \u00e7ilingir ekibini y\u00f6nlendiriyoruz."),
+        ("Kartal'da kilidi bozmadan kap\u0131 a\u00e7ma yap\u0131l\u0131r m\u0131?", "Kilit ve kap\u0131 durumu uygunsa kilidi bozmadan, kontroll\u00fc kap\u0131 a\u00e7ma y\u00f6ntemlerini tercih ediyoruz. Uygulanabilecek i\u015flemi m\u00fcdahale \u00f6ncesinde a\u00e7\u0131kl\u0131yoruz."),
+        ("Kartal acil \u00e7ilingir hizmetinde i\u015flemden \u00f6nce bilgi veriliyor mu?", "Evet. Konum ve ihtiya\u00e7 bilgilerinizi ald\u0131ktan sonra yap\u0131labilecek i\u015flemi ve fiyatland\u0131rma yakla\u015f\u0131m\u0131n\u0131 i\u015flemden \u00f6nce payla\u015f\u0131yoruz."),
+    ],
+    "Maltepe": [
+        ("Maltepe'de kap\u0131da kald\u0131m, gece acil \u00e7ilingir gelir mi?", "Maltepe'de 7/24 mobil acil \u00e7ilingir deste\u011fi sa\u011fl\u0131yoruz. Telefon veya WhatsApp \u00fczerinden konumunuzu iletti\u011finizde uygun ekibi planl\u0131yoruz."),
+        ("Maltepe'de kilidi bozmadan kap\u0131 a\u00e7\u0131yor musunuz?", "Kap\u0131 ve kilit yap\u0131s\u0131 izin verdi\u011fi s\u00fcrece kilidi bozmadan, kontroll\u00fc a\u00e7ma y\u00f6ntemlerini kullanmay\u0131 hedefliyoruz. Gereksiz par\u00e7a de\u011fi\u015fimi yapm\u0131yoruz."),
+        ("Maltepe'de kilit de\u011fi\u015fimi i\u00e7in de mobil servis var m\u0131?", "Evet. Kilit g\u00f6be\u011fi ve barel de\u011fi\u015fimi i\u00e7in kap\u0131y\u0131 ve mevcut sistemi kontrol ederek uygun \u00fcr\u00fcnle yerinde destek veriyoruz."),
+    ],
+    "Tuzla": [
+        ("Tuzla'da kap\u0131da kald\u0131m, acil \u00e7ilingir i\u00e7in ne yapmal\u0131y\u0131m?", "Tuzla'da telefonla arayabilir veya WhatsApp'tan konum g\u00f6nderebilirsiniz. Kap\u0131 t\u00fcr\u00fcn\u00fc ve ihtiyac\u0131n\u0131z\u0131 dinleyerek mobil ekip y\u00f6nlendiriyoruz."),
+        ("Tuzla'da kilidi bozmadan a\u00e7ma hizmeti veriliyor mu?", "Kilit mekanizmas\u0131 ve kap\u0131 durumu uygunsa kilidi bozmadan a\u00e7ma y\u00f6ntemlerini de\u011ferlendiriyoruz. M\u00fcdahale se\u00e7eneklerini \u00f6nceden anlat\u0131yoruz."),
+        ("Tuzla'da i\u015f yeri veya ara\u00e7 i\u00e7in acil \u00e7ilingir \u00e7a\u011f\u0131rabilir miyim?", "Evet. Ev, i\u015f yeri ve uygun ara\u00e7 kap\u0131lar\u0131nda marka, model ve konum bilgilerinize g\u00f6re uygun mobil deste\u011fi planl\u0131yoruz."),
+    ],
+    "Pendik": [
+        ("Pendik'te kap\u0131da kald\u0131m, 7/24 acil \u00e7ilingir hizmeti var m\u0131?", "Pendik ve mahallelerinde 7/24 acil \u00e7ilingir y\u00f6nlendirmesi yap\u0131yoruz. Konumunuzu telefonla veya WhatsApp'tan iletmeniz yeterlidir."),
+        ("Pendik'te kilidi bozmadan kap\u0131 a\u00e7mak m\u00fcmk\u00fcn m\u00fc?", "Kap\u0131n\u0131n ve kilidin durumuna g\u00f6re kilidi bozmadan kontroll\u00fc a\u00e7ma y\u00f6ntemleri uygulanabilir. Ekip gelmeden \u00f6nce ihtiyac\u0131n\u0131z\u0131 dinliyoruz."),
+        ("Pendik'te oto \u00e7ilingir ve anahtar deste\u011fi alabilir miyim?", "Ara\u00e7 kap\u0131s\u0131, anahtar veya kumanda sorununuzda marka, model ve konum bilgilerini alarak uygun oto \u00e7ilingir deste\u011fini y\u00f6nlendiriyoruz."),
+    ],
+    "Kad\u0131k\u00f6y": [
+        ("Bostanc\u0131'da kap\u0131da kald\u0131m, acil \u00e7ilingir nas\u0131l \u00e7a\u011f\u0131rabilirim?", "Bostanc\u0131 ve Kad\u0131k\u00f6y mahallelerinde konumunuzu WhatsApp'tan g\u00f6nderebilir veya telefonla arayabilirsiniz. Uygun mobil \u00e7ilingir ekibini y\u00f6nlendiriyoruz."),
+        ("Bostanc\u0131'da kilidi bozmadan kap\u0131 a\u00e7ma yap\u0131yor musunuz?", "Kap\u0131 ve kilit yap\u0131s\u0131 uygunsa kilidi bozmadan kontroll\u00fc kap\u0131 a\u00e7ma y\u00f6ntemlerini tercih ediyoruz. M\u00fcdahale \u00f6ncesinde bilgi veriyoruz."),
+        ("Kad\u0131k\u00f6y ve Bostanc\u0131'da kilit de\u011fi\u015fimi yap\u0131l\u0131yor mu?", "Evet. Ev, ofis ve site kap\u0131lar\u0131nda kilit g\u00f6be\u011fi veya barel de\u011fi\u015fimini mevcut kap\u0131 sistemini kontrol ederek yerinde yap\u0131yoruz."),
+    ],
+    "\u00dcsk\u00fcdar": [
+        ("\u00dcsk\u00fcdar'da kap\u0131da kald\u0131m, acil \u00e7ilingir ne kadar s\u00fcrede gelir?", "\u00dcsk\u00fcdar'da konumunuzu ve kap\u0131 tipinizi ald\u0131ktan sonra uygun mobil ekibi planl\u0131yoruz. Tahmini y\u00f6nlendirme bilgisini ileti\u015fim s\u0131ras\u0131nda payla\u015f\u0131yoruz."),
+        ("\u00dcsk\u00fcdar'da kilidi bozmadan kap\u0131 a\u00e7\u0131labilir mi?", "Kilit ve kap\u0131 mekanizmas\u0131 uygunsa kilidi bozmadan kontroll\u00fc a\u00e7ma se\u00e7eneklerini de\u011ferlendiriyoruz. Hasars\u0131z m\u00fcdahale hedefliyoruz."),
+        ("\u00dcsk\u00fcdar'da gece de acil \u00e7ilingir hizmeti alabilir miyim?", "Evet. 7/24 telefon ve WhatsApp deste\u011fiyle kap\u0131 a\u00e7ma, kilit ar\u0131zas\u0131 ve kilit de\u011fi\u015fimi taleplerinizi al\u0131yoruz."),
+    ],
+    "Sultanbeyli": [
+        ("Sultanbeyli'de kap\u0131da kald\u0131m, acil \u00e7ilingir nas\u0131l \u00e7a\u011f\u0131r\u0131l\u0131r?", "Sultanbeyli'nde telefonla veya WhatsApp'tan konumunuzu payla\u015fabilirsiniz. Kap\u0131 tipinizi ve sorununuzu dinleyerek uygun mobil ekibi y\u00f6nlendiriyoruz."),
+        ("Sultanbeyli'de kilidi bozmadan kap\u0131 a\u00e7ma yap\u0131yor musunuz?", "Kap\u0131 ve kilit durumu elverdi\u011finde kilidi bozmadan kontroll\u00fc a\u00e7ma y\u00f6ntemlerini uyguluyoruz. Gereksiz kilit de\u011fi\u015fimi yapmadan \u00f6nce se\u00e7enekleri anlat\u0131yoruz."),
+        ("Sultanbeyli'de g\u00fcvenlik i\u00e7in kilit de\u011fi\u015ftirilir mi?", "Anahtar kayb\u0131, ta\u015f\u0131nma veya kilit ar\u0131zas\u0131 sonras\u0131nda kilit g\u00f6be\u011fi ve barel de\u011fi\u015fimi i\u00e7in yerinde destek veriyoruz."),
+    ],
+}
+
 
 def slugify(value):
     table = str.maketrans("\u00e7\u011f\u0131\u00f6\u015f\u00fc\u00c7\u011e\u0130\u00d6\u015e\u00dc", "cgiosuCGIOSU")
@@ -247,6 +285,23 @@ def render_template(path, template_path=TEMPLATE_PATH):
     faq_answer = f"{location_label} için telefonla veya WhatsApp üzerinden konumunuzu paylaşabilirsiniz. JET Çilingir, {focus_title.lower()} ihtiyacınızı ve kapı veya araç tipini dinledikten sonra uygun mobil ekibi yönlendirir."
     faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": faq_question, "acceptedAnswer": {"@type": "Answer", "text": faq_answer}}]}, ensure_ascii=False)
     faq_html = f'<h2>{escape(location_label)} Sık Sorulan Sorular</h2><div class="faq-item"><h3>{escape(faq_question)}</h3><p>{escape(faq_answer)}</p></div>'
+    faq_entries = PRIORITY_FAQS.get(area_name) if not neighborhood_name else None
+    if area_name == "Kad\u0131k\u00f6y" and neighborhood_name == "Bostanc\u0131":
+        faq_entries = [
+            ("Bostanc\u0131'da kap\u0131da kald\u0131m, hemen acil \u00e7ilingir gelebilir mi?", "Bostanc\u0131'da telefon veya WhatsApp \u00fczerinden konumunuzu ald\u0131ktan sonra uygun mobil kap\u0131 a\u00e7ma ekibini y\u00f6nlendiriyoruz."),
+            ("Bostanc\u0131'da kilidi bozmadan a\u00e7ma hizmeti alabilir miyim?", "Kap\u0131 ve kilit mekanizmas\u0131 uygunsa kilidi bozmadan kontroll\u00fc a\u00e7ma y\u00f6ntemlerini tercih ediyoruz. Yap\u0131labilecek i\u015flemi gelmeden \u00f6nce aktar\u0131yoruz."),
+            ("Bostanc\u0131 acil \u00e7ilingir hizmetinde fiyat ne zaman bildirilir?", "Konum, kap\u0131 tipi ve ihtiyac\u0131n\u0131z\u0131 dinledikten sonra i\u015flem \u00f6ncesinde yap\u0131labilecek i\u015flemi ve fiyatland\u0131rma yakla\u015f\u0131m\u0131n\u0131 a\u00e7\u0131kl\u0131yoruz."),
+        ]
+    if faq_entries:
+        faq_entities = [
+            {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
+            for question, answer in faq_entries
+        ]
+        faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": faq_entities}, ensure_ascii=False)
+        faq_html = '<h2>{} S\u0131k Sorulan Sorular</h2>{}'.format(
+            escape(area_name),
+            "".join(f'<div class="faq-item"><h3>{escape(question)}</h3><p>{escape(answer)}</p></div>' for question, answer in faq_entries),
+        )
     breadcrumb_items = [{"@type": "ListItem", "position": 1, "name": "Anasayfa", "item": "https://www.jetcilingir34.com/"}]
     if area:
         breadcrumb_items.append({"@type": "ListItem", "position": 2, "name": f"{area_name} Çilingir", "item": f"https://www.jetcilingir34.com/istanbul/{slug}-cilingir"})
