@@ -124,6 +124,27 @@ def build_district_faqs(area_name):
     return list(zip(questions, answers))
 
 
+def build_neighborhood_faqs(area_name, neighborhood_name):
+    """Create two local door-opening FAQs for every neighborhood page."""
+    seed = sum(ord(char) for char in f"{area_name}-{neighborhood_name}")
+    first_questions = [
+        f"{neighborhood_name}'nda kap\u0131da kald\u0131m, acil \u00e7ilingir nas\u0131l \u00e7a\u011f\u0131rabilirim?",
+        f"{neighborhood_name} mahallesinde kap\u0131da kald\u0131\u011f\u0131mda 7/24 \u00e7ilingir gelir mi?",
+        f"{area_name} {neighborhood_name} b\u00f6lgesinde acil kap\u0131 a\u00e7ma hizmeti alabilir miyim?",
+    ]
+    second_questions = [
+        f"{neighborhood_name}'nda kilidi bozmadan kap\u0131 a\u00e7ma yap\u0131l\u0131r m\u0131?",
+        f"{area_name} {neighborhood_name} kilidi bozmadan kap\u0131 a\u00e7ma hizmeti veriyor musunuz?",
+        f"{neighborhood_name} mahallesinde hasars\u0131z kap\u0131 a\u00e7ma m\u00fcmk\u00fcn m\u00fc?",
+    ]
+    questions = [first_questions[seed % 3], second_questions[(seed // 3) % 3]]
+    answers = [
+        f"{neighborhood_name}, {area_name} b\u00f6lgesinde telefonla veya WhatsApp'tan konumunuzu al\u0131yoruz. Kap\u0131 tipinizi ve sorununuzu dinleyerek uygun acil \u00e7ilingir ekibini y\u00f6nlendiriyoruz.",
+        f"Kap\u0131 ve kilit mekanizmas\u0131 uygunsa {neighborhood_name} mahallesinde kilidi bozmadan, kontroll\u00fc kap\u0131 a\u00e7ma y\u00f6ntemlerini de\u011ferlendiriyoruz. Yap\u0131labilecek i\u015flemi m\u00fcdahale \u00f6ncesinde a\u00e7\u0131kl\u0131yoruz.",
+    ]
+    return list(zip(questions, answers))
+
+
 def slugify(value):
     table = str.maketrans("\u00e7\u011f\u0131\u00f6\u015f\u00fc\u00c7\u011e\u0130\u00d6\u015e\u00dc", "cgiosuCGIOSU")
     return value.translate(table).lower().replace(" ", "-")
@@ -337,6 +358,8 @@ def render_template(path, template_path=TEMPLATE_PATH):
             ("Bostanc\u0131'da kilidi bozmadan a\u00e7ma hizmeti alabilir miyim?", "Kap\u0131 ve kilit mekanizmas\u0131 uygunsa kilidi bozmadan kontroll\u00fc a\u00e7ma y\u00f6ntemlerini tercih ediyoruz. Yap\u0131labilecek i\u015flemi gelmeden \u00f6nce aktar\u0131yoruz."),
             ("Bostanc\u0131 acil \u00e7ilingir hizmetinde fiyat ne zaman bildirilir?", "Konum, kap\u0131 tipi ve ihtiyac\u0131n\u0131z\u0131 dinledikten sonra i\u015flem \u00f6ncesinde yap\u0131labilecek i\u015flemi ve fiyatland\u0131rma yakla\u015f\u0131m\u0131n\u0131 a\u00e7\u0131kl\u0131yoruz."),
         ]
+    if neighborhood_name:
+        faq_entries = build_neighborhood_faqs(area_name, neighborhood_name)
     if faq_entries:
         faq_entities = [
             {"@type": "Question", "name": question, "acceptedAnswer": {"@type": "Answer", "text": answer}}
