@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import datetime, timezone
 import re
 import shutil
 
@@ -8,6 +9,7 @@ import app
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
 PUBLIC_DOMAIN = "https://www.jetcilingir34.com"
+BUILD_DATE = datetime.now(timezone.utc).date().isoformat()
 
 
 def clean_text(content):
@@ -52,7 +54,7 @@ def main():
             neighborhood_urls.append(f"{PUBLIC_DOMAIN}{neighborhood_path}")
 
     urls = [f"{PUBLIC_DOMAIN}/", f"{PUBLIC_DOMAIN}/hakkimizda.html", f"{PUBLIC_DOMAIN}/iletisim.html"] + service_urls + district_urls + neighborhood_urls
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{url}</loc><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>\n"
+    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{url}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>\n"
     (PUBLIC_DIR / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (PUBLIC_DIR / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PUBLIC_DOMAIN}/sitemap.xml\n", encoding="utf-8")
     print(f"Generated {len(urls)} pages in {PUBLIC_DIR}")

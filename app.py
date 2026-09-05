@@ -3,10 +3,12 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import re
 from pathlib import Path
+from datetime import datetime, timezone
 from urllib.parse import urlsplit
 
 
 BASE_DIR = Path(__file__).resolve().parent
+PUBLIC_DOMAIN = "https://www.jetcilingir34.com"
 TEMPLATE_PATH = BASE_DIR / "templates" / "index.html"
 CONTACT_TEMPLATE_PATH = BASE_DIR / "templates" / "iletisim.html"
 ABOUT_TEMPLATE_PATH = BASE_DIR / "templates" / "hakkimizda.html"
@@ -216,6 +218,8 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "url": f"https://www.jetcilingir34.com{path if path != '/index.html' else '/'}",
         "telephone": PHONE_TEL,
         "email": "info@jetcilingir34.com",
+        "image": f"{PUBLIC_DOMAIN}/assets/og-image.svg",
+        "logo": f"{PUBLIC_DOMAIN}/assets/favicon.svg",
         "areaServed": service_areas,
         "serviceType": ["Acil çilingir", "Kapı açma", "Kilit değişimi", "Oto çilingir", "Çelik kasa açma"],
         "openingHoursSpecification": [{"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"], "opens": "00:00", "closes": "23:59"}],
@@ -286,6 +290,9 @@ def render_template(path, template_path=TEMPLATE_PATH):
         "{{LOCAL_SCHEMA}}": local_schema,
         "{{FAQ_HTML}}": faq_html,
         "{{FAQ_SCHEMA}}": faq_schema,
+        "{{FAQ_TITLE}}": f"{service['name'] if service else location_label} Sık Sorulan Sorular",
+        "{{FAQ_QUESTION}}": faq_question,
+        "{{FAQ_ANSWER}}": faq_answer,
         "{{BREADCRUMB_HTML}}": breadcrumb_html,
     }
     values["{{META_DESCRIPTION}}"] = f"{neighborhood_name + ' ' if neighborhood_name else ''}{area_name} 7/24 acil \u00e7ilingir hizmeti. JET \u00c7ilingir; kap\u0131 a\u00e7ma, kilit de\u011fi\u015fimi ve oto \u00e7ilingir deste\u011fiyle h\u0131zl\u0131ca yan\u0131n\u0131zda."
@@ -314,7 +321,8 @@ class Handler(BaseHTTPRequestHandler):
             district_urls = [f"https://www.jetcilingir34.com/istanbul/{slugify(name)}-cilingir" for name in DISTRICTS]
             neighborhood_urls = [f"https://www.jetcilingir34.com/istanbul/{slug}/{slugify(neighborhood)}-cilingir" for slug, neighborhoods in NEIGHBORHOODS_BY_SLUG.items() for neighborhood in neighborhoods]
             urls = ["https://www.jetcilingir34.com/", "https://www.jetcilingir34.com/hakkimizda.html", "https://www.jetcilingir34.com/iletisim.html"] + [f"https://www.jetcilingir34.com/hizmetler/{slug}.html" for slug in SERVICE_PAGES] + district_urls + neighborhood_urls
-            xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" + "".join(f"<url><loc>{url}</loc><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>"
+            lastmod = datetime.now(timezone.utc).date().isoformat()
+            xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">" + "".join(f"<url><loc>{url}</loc><lastmod>{lastmod}</lastmod><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>"
             content = xml.encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "application/xml; charset=utf-8")
