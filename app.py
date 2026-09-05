@@ -80,6 +80,49 @@ PRIORITY_FAQS = {
     ],
 }
 
+# Remaining districts use different local service profiles instead of one copied FAQ set.
+FAQ_PROFILE_BY_DISTRICT = {}
+for _districts, _profile in [
+    (["Adalar", "Arnavutk\u00f6y", "Beykoz", "\u00c7atalca", "Silivri", "\u015eile"], ("ev, villa ve site kap\u0131lar\u0131", "mobil ekip ve konum bilgisi")),
+    (["Ata\u015fehir", "Be\u015fikta\u015f", "Beyo\u011flu", "Ka\u011f\u0131thane", "Sar\u0131yer", "\u015ei\u015fli"], ("ofis, d\u00fckkan ve apartman giri\u015fleri", "mesai d\u0131\u015f\u0131 acil destek")),
+    (["Avc\u0131lar", "Ba\u011fc\u0131lar", "Bah\u00e7elievler", "Ba\u015fak\u015fehir", "Bayrampa\u015fa", "Esenler", "Esenyurt", "Fatih", "Gaziosmanpa\u015fa", "G\u00fcng\u00f6ren", "K\u00fc\u00e7\u00fck\u00e7ekmece", "Sultangazi", "Zeytinburnu"], ("apartman, site ve bina giri\u015fleri", "7/24 kap\u0131da kalma deste\u011fi")),
+    (["Bak\u0131rk\u00f6y", "Beylikd\u00fcz\u00fc", "B\u00fcy\u00fck\u00e7ekmece", "Ey\u00fcpsultan", "\u00dcmraniye"], ("ev, i\u015f yeri ve g\u00fcvenlik kilitleri", "kilit g\u00f6be\u011fi ve barel de\u011fi\u015fimi")),
+    (["\u00c7ekmek\u00f6y", "Sancaktepe"], ("site, apartman ve m\u00fcstakil ev kap\u0131lar\u0131", "anahtar kayb\u0131 sonras\u0131 kilit yenileme")),
+]:
+    for _district in _districts:
+        FAQ_PROFILE_BY_DISTRICT[_district] = _profile
+
+
+def build_district_faqs(area_name):
+    """Create varied local FAQs for districts without a hand-written FAQ set."""
+    service_scope, profile_focus = FAQ_PROFILE_BY_DISTRICT.get(
+        area_name,
+        ("ev ve i\u015f yeri kap\u0131lar\u0131", "acil \u00e7ilingir ve kilit deste\u011fi"),
+    )
+    seed = sum(ord(char) for char in area_name)
+    question_starts = [
+        f"{area_name}'nda kap\u0131da kald\u0131m, acil \u00e7ilingir nas\u0131l \u00e7a\u011f\u0131rabilirim?",
+        f"{area_name} b\u00f6lgesinde kap\u0131da kald\u0131\u011f\u0131mda 7/24 \u00e7ilingir gelir mi?",
+        f"{area_name} i\u00e7in gece acil \u00e7ilingir deste\u011fi alabilir miyim?",
+    ]
+    question_second = [
+        f"{area_name}'nda kilidi bozmadan kap\u0131 a\u00e7ma yap\u0131l\u0131r m\u0131?",
+        f"{area_name} kilidi bozmadan a\u00e7ma hizmetinde hangi y\u00f6ntemler kullan\u0131l\u0131r?",
+        f"{area_name} b\u00f6lgesinde hasars\u0131z kap\u0131 a\u00e7ma m\u00fcmk\u00fcn m\u00fc?",
+    ]
+    question_third = [
+        f"{area_name} b\u00f6lgesinde {profile_focus} i\u00e7in destek veriyor musunuz?",
+        f"{area_name} acil \u00e7ilingir hizmetinde i\u015flem \u00f6ncesi bilgi alabilir miyim?",
+        f"{area_name} mahallelerinde {service_scope} i\u00e7in mobil ekip y\u00f6nlendiriliyor mu?",
+    ]
+    questions = [question_starts[seed % len(question_starts)], question_second[(seed // 3) % len(question_second)], question_third[(seed // 7) % len(question_third)]]
+    answers = [
+        f"{area_name} ve mahallelerinde telefonla veya WhatsApp'tan konumunuzu payla\u015fabilirsiniz. Kap\u0131 tipinizi ve ihtiyac\u0131n\u0131z\u0131 dinleyerek uygun acil \u00e7ilingir ekibini y\u00f6nlendiriyoruz.",
+        f"Kap\u0131 ve kilit mekanizmas\u0131 uygunsa {area_name} b\u00f6lgesinde kilidi bozmadan, kontroll\u00fc a\u00e7ma y\u00f6ntemlerini de\u011ferlendiriyoruz. Yap\u0131labilecek i\u015flemi m\u00fcdahale \u00f6ncesinde a\u00e7\u0131kl\u0131yoruz.",
+        f"{area_name} b\u00f6lgesinde {service_scope} i\u00e7in konum ve ihtiya\u00e7 bilgilerinizi al\u0131yoruz. Uygun mobil ekibi planlayarak {profile_focus} konusunda i\u015flem \u00f6ncesi bilgilendirme yap\u0131yoruz.",
+    ]
+    return list(zip(questions, answers))
+
 
 def slugify(value):
     table = str.maketrans("\u00e7\u011f\u0131\u00f6\u015f\u00fc\u00c7\u011e\u0130\u00d6\u015e\u00dc", "cgiosuCGIOSU")
@@ -286,6 +329,8 @@ def render_template(path, template_path=TEMPLATE_PATH):
     faq_schema = json.dumps({"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": faq_question, "acceptedAnswer": {"@type": "Answer", "text": faq_answer}}]}, ensure_ascii=False)
     faq_html = f'<h2>{escape(location_label)} Sık Sorulan Sorular</h2><div class="faq-item"><h3>{escape(faq_question)}</h3><p>{escape(faq_answer)}</p></div>'
     faq_entries = PRIORITY_FAQS.get(area_name) if not neighborhood_name else None
+    if not neighborhood_name and not faq_entries:
+        faq_entries = build_district_faqs(area_name)
     if area_name == "Kad\u0131k\u00f6y" and neighborhood_name == "Bostanc\u0131":
         faq_entries = [
             ("Bostanc\u0131'da kap\u0131da kald\u0131m, hemen acil \u00e7ilingir gelebilir mi?", "Bostanc\u0131'da telefon veya WhatsApp \u00fczerinden konumunuzu ald\u0131ktan sonra uygun mobil kap\u0131 a\u00e7ma ekibini y\u00f6nlendiriyoruz."),
