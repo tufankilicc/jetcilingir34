@@ -10,6 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
 PUBLIC_DOMAIN = "https://www.jetcilingir34.com"
 BUILD_DATE = datetime.now(timezone.utc).date().isoformat()
+YANDEX_VERIFICATION_FILE = "yandex_d894ac1085b171db.html"
+YANDEX_VERIFICATION_HTML = "<html><body>Verification: d894ac1085b171db</body></html>\n"
 
 
 def clean_text(content):
@@ -57,6 +59,7 @@ def main():
     sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' + "".join(f"<url><loc>{url}</loc><lastmod>{BUILD_DATE}</lastmod><changefreq>weekly</changefreq></url>" for url in urls) + "</urlset>\n"
     (PUBLIC_DIR / "sitemap.xml").write_text(sitemap, encoding="utf-8")
     (PUBLIC_DIR / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {PUBLIC_DOMAIN}/sitemap.xml\n", encoding="utf-8")
+    (PUBLIC_DIR / YANDEX_VERIFICATION_FILE).write_text(YANDEX_VERIFICATION_HTML, encoding="utf-8")
     print(f"Generated {len(urls)} pages in {PUBLIC_DIR}")
 
 
