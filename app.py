@@ -27,6 +27,21 @@ DISTRICTS = [
     "\u00dcsk\u00fcdar", "Zeytinburnu",
 ]
 
+# These districts receive deeper, service-specific copy and internal linking.
+PRIORITY_DISTRICTS = [
+    "Kartal", "Maltepe", "Tuzla", "Pendik", "Kad\u0131k\u00f6y", "\u00dcsk\u00fcdar", "Sultanbeyli",
+]
+
+PRIORITY_AREA_FOCUS = {
+    "Kartal": "Kartal acil \u00e7ilingir, kap\u0131 a\u00e7ma ve kilit de\u011fi\u015fimi",
+    "Maltepe": "Maltepe 7/24 \u00e7ilingir, kilit de\u011fi\u015fimi ve oto \u00e7ilingir",
+    "Tuzla": "Tuzla mobil \u00e7ilingir, kap\u0131 a\u00e7ma ve anahtar hizmeti",
+    "Pendik": "Pendik acil \u00e7ilingir, oto \u00e7ilingir ve kilit yenileme",
+    "Kad\u0131k\u00f6y": "Kad\u0131k\u00f6y ve Bostanc\u0131 kap\u0131 a\u00e7ma, kilit de\u011fi\u015fimi ve mobil \u00e7ilingir",
+    "\u00dcsk\u00fcdar": "\u00dcsk\u00fcdar 7/24 acil \u00e7ilingir ve kilit hizmeti",
+    "Sultanbeyli": "Sultanbeyli acil \u00e7ilingir, kap\u0131 a\u00e7ma ve g\u00fcvenlik kilidi",
+}
+
 
 def slugify(value):
     table = str.maketrans("\u00e7\u011f\u0131\u00f6\u015f\u00fc\u00c7\u011e\u0130\u00d6\u015e\u00dc", "cgiosuCGIOSU")
@@ -256,6 +271,34 @@ def render_template(path, template_path=TEMPLATE_PATH):
         variant_body = variant_body.format(neighborhood=escape(neighborhood_name), district=escape(area_name))
         variant_note = variant_note.format(neighborhood=escape(neighborhood_name), district=escape(area_name))
         neighborhood_content = f'<section class="neighborhoods" aria-labelledby="mahalleler-baslik"><h2 id="mahalleler-baslik">{escape(neighborhood_name)} {escape(area_name)} Çilingir | {variant_heading}</h2><p>{variant_body}</p><p>{variant_note} 7/24 mobil ekip için hemen arayabilir veya WhatsApp üzerinden konum gönderebilirsiniz.</p><div class="neighborhood-grid">{neighborhood_links}</div></section>'
+    if area_name in PRIORITY_AREA_FOCUS and not neighborhood_name:
+        priority_services = [
+            ("Acil \u00c7ilingir", "acil-cilingir"),
+            ("Kap\u0131 A\u00e7ma", "kapi-acma"),
+            ("Kilit De\u011fi\u015fimi", "kilit-degisimi"),
+            ("Oto \u00c7ilingir", "oto-cilingir"),
+            ("\u00c7elik Kasa A\u00e7ma", "celik-kasa-acma"),
+            ("Anahtar Kopyalama", "anahtar-kopyalama"),
+        ]
+        service_links = "".join(
+            f'<a href="/hizmetler/{slug}.html">{label}</a>' for label, slug in priority_services
+        )
+        related_links = "".join(
+            f'<a href="/istanbul/{slugify(name)}-cilingir">{escape(name)} \u00c7ilingir</a>'
+            for name in PRIORITY_DISTRICTS
+            if name != area_name
+        )
+        focus = PRIORITY_AREA_FOCUS[area_name]
+        area_seo_content = (
+            f'<h2>{escape(focus)} | JET \u00c7ilingir</h2>'
+            f'<p>{escape(area_name)} b\u00f6lgesinde kap\u0131da kalma, kilit ar\u0131zas\u0131, anahtar kayb\u0131 ve ara\u00e7 anahtar\u0131 sorunlar\u0131 i\u00e7in 7/24 mobil \u00e7ilingir deste\u011fi sa\u011fl\u0131yoruz. '
+            f'Konumunuzu ve ihtiyac\u0131n\u0131z\u0131 telefonda dinleyerek uygun ekibi y\u00f6nlendiriyor, i\u015flem \u00f6ncesinde yap\u0131labilecek i\u015flemi a\u00e7\u0131kl\u0131yoruz.</p>'
+            f'<p>{escape(area_name)} ev, i\u015f yeri, apartman, site ve uygun ara\u00e7 hizmetlerinde; kontroll\u00fc kap\u0131 a\u00e7ma, kilit g\u00f6be\u011fi ve barel de\u011fi\u015fimi, oto \u00e7ilingir ve \u00e7elik kasa a\u00e7ma \u00e7\u00f6z\u00fcmleri sunuyoruz. '
+            f'Bostanc\u0131 ve Kad\u0131k\u00f6y sayfas\u0131nda oldu\u011fu gibi her hizmeti ilgili detay sayfas\u0131ndan inceleyebilirsiniz.</p>'
+            f'<p class="area-link-lead">{escape(area_name)} i\u00e7in ilgili hizmetler:</p><div class="area-service-links">{service_links}</div>'
+            f'<p class="area-link-lead">Yak\u0131n ve \u00f6ncelikli hizmet b\u00f6lgeleri:</p><div class="area-service-links">{related_links}</div>'
+        )
+        area_seo_content = repair_text(area_seo_content)
     area_links = "".join(
         f'<a href="/istanbul/{slugify(name)}-cilingir">{escape(name)} Çilingir</a>'
         for name in DISTRICTS
